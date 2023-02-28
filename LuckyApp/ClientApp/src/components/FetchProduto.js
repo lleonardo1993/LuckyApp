@@ -34,26 +34,26 @@ export class FetchProduto extends Component {
     static renderProdutosTabela(produtos) {
 
         return (
-            <table className='table table-striped' aria-aria-labelledby="tabelLabel" >
+            <table className='table table-striped' aria-labelledby="tabelLabel" >
                 <thead>
                     <tr>
                         <th>Código</th>
                         <th>Descrição</th>
-                        <th></th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
-                <body>
-                    {
-                        produtos.map(prod =>
-                            <tr key={prod.id}>
-                                <td key={prod.descricao}></td>
-                                <td>
-                                    <button className="btn btn-sucess" onClick={(id) => this.handleEdit(prod.id)}>Edit</button> &nbsp;
-                                    <button className="btn btn-danger" onClick={(id) => this.handleDelete(prod.id)}>Delete</button> ;
-                                </td>
-                            </tr>
-                        )}
-                </body>
+                <tbody>
+                    {produtos.map(prod =>
+                        <tr key={prod.id}>
+                            <td>{prod.id}</td>
+                            <td>{prod.descricao}</td>
+                            <td>
+                                <button className="btn btn-success" onClick={(id) => this.handleEdit(prod.id)}>Edit</button> &nbsp;
+                                <button className="btn btn-danger" onClick={(id) => this.handleDelete(prod.id)}>Delete</button>
+                            </td>
+                        </tr>
+                    )}
+                </tbody>
             </table>
         );
     }
@@ -71,7 +71,6 @@ export class FetchProduto extends Component {
                 <p>
                     <Link to="/add-produto"> Cadastrar Produto</Link>
                 </p>
-
                 {contents}
             </div>
         );
@@ -80,7 +79,7 @@ export class FetchProduto extends Component {
     async populaProdutoData() {
         const response = await fetch('api/Produtos');
         const data = await response.json();
-        this.setState({ produtos: data, loading: false })
+        this.setState({ produtos: data, loading: false });
     }
 
 }
