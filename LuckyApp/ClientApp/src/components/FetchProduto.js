@@ -20,15 +20,14 @@ export class FetchProduto extends Component {
     static handleDelete(id) {
         if (!window.confirm("Você deseja deletar o produto : " + id)) {
             return;
-        } else {
-            fetch('api/produtos/' + id, { method: 'delete' }) // redireciona para rota delete api
-                .then(json => {
-                    window.location.href = "fetch-produto"; // redireciona para listagem de produtos
-                    alert('Deletado com sucesso!');
-                })
-
         }
-
+        else {
+            fetch('api/produtos/' + id, { method: 'delete' })
+                .then(json => {
+                    window.location.href = "fetch-produto";
+                    alert('Deletado com Sucesso!');
+                })
+        }
     }
 
     static renderProdutosTabela(produtos) {
@@ -47,34 +46,38 @@ export class FetchProduto extends Component {
                         <tr key={prod.id}>
                             <td>{prod.id}</td>
                             <td>{prod.descricao}</td>
+
                             <td>
                                 <button className="btn btn-success" onClick={(id) => this.handleEdit(prod.id)}>Edit</button> &nbsp;
                                 <button className="btn btn-danger" onClick={(id) => this.handleDelete(prod.id)}>Delete</button>
                             </td>
+
                         </tr>
+
                     )}
                 </tbody>
             </table>
         );
+
     }
 
     render() {
         let contents = this.state.loading
-            ? <p><em> Carregando... </em></p>
+            ? <p><em> Carregando... </em> </p>
             : FetchProduto.renderProdutosTabela(this.state.produtos);
 
         return (
             <div>
                 <h1 id="tabelLabel" >Produtos</h1>
                 <p>Tela de Listagem de Produtos</p>
-
                 <p>
-                    <Link to="/add-produto"> Cadastrar Produto</Link>
+                    <Link to="/add-produto">Cadastrar Produto</Link>
                 </p>
                 {contents}
             </div>
         );
     }
+
 
     async populaProdutoData() {
         const response = await fetch('api/Produtos');
@@ -83,9 +86,3 @@ export class FetchProduto extends Component {
     }
 
 }
-
-
-
-
-
-

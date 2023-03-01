@@ -45,7 +45,7 @@ namespace LuckyApp.Controllers
         // PUT: api/Produtos/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProduto(int id,[FromForm] Produto produto)
+        public async Task<IActionResult> PutProduto(int id, [FromForm] Produto produto)
         {
             if (id != produto.Id)
             {
@@ -76,7 +76,7 @@ namespace LuckyApp.Controllers
         // POST: api/Produtos
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Produto>> PostProduto(Produto produto)
+        public async Task<ActionResult<Produto>> PostProduto([FromForm] Produto produto)
         {
             _context.Produto.Add(produto);
             await _context.SaveChangesAsync();
